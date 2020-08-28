@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+
+    <title>Target Indicator</title>
+</head>
+<body>
+     <!-- Input for dynamic target and indicator -->
+     
+       <form action="" onsubmit="" id="form" class="form"> 
+        <div class="form-group">
+            <label for="target">Target:</label>
+            <input type="number" name="target" id="target"  required placeholder="Enter Target value in $">
+        </div>
+        <div class="form-group">
+            <label for="reached">Reached:</label>
+            <input type="number" name="reached" id="reached" required placeholder="Enter Reached Value in $">
+        </div>
+         <button type="submit">Calculate</button>
+       </form>
+        
+     
+    <div class="target-indicator">
+         <div class="target-indicator__header">
+            Target Indicator Demo
+         </div>
+         <div class='target-indicator__body-wrapper'>
+         <div class="target-indicator__body">
+             <!-- top body part the indicator -->
+             <div class="target-indicator__body-indicator">
+                 <p class='target-indicator__body-title'>Reached: </p>
+                 <div class="progress-bar">
+                     <div class="progress-bar__child " id="indicator">
+                      <div class="progress-bar__indicator" >
+                        <i class="fas fa-sort-up"></i>
+                        <span id='reached-field'>$14</span>
+                      </div>
+                     </div>
+                 </div>
+                 <div class="target-indicator__body-goal">
+                     <p>Target</p>
+                     <hr/>
+                     <p id='target-field'>$15</p>
+                 </div>
+             </div>
+             <!-- The bottom part containg the text -->
+            <div class="target-indicator__body-info">
+                <img src="./info-svgrepo-com.svg" alt="info">
+                <p class="target-indicator__body-text">You need <span id='difference-field'>$1</span> more to reach your target.</p>
+            </div>
+
+         </div>
+        </div>
+    </div>
+    <script>
+        // Get Form from the dom and store it in variable
+        let  form = document.getElementById('form')
+        // Adding event listener submit for form
+        form.addEventListener("submit", (e)=> {
+            e.preventDefault();
+            // Get target Value
+            let  target = document.getElementById('target').value
+
+            // Reached Value
+            let  reached = document.getElementById('reached').value
+
+            
+
+            
+            // Target should be always superior or equal to reached value
+            if (target>=reached){
+                // Change The value of reach to the new one ffrom input
+                document.getElementById('reached-field').innerHTML=`$${reached}`
+
+                // Change The target value to the new one from input
+                 document.getElementById('target-field').innerHTML=`$${target}`
+
+                // get the arrow head indicator Dom and change the position 
+                document.getElementById('indicator').style.width=`${(reached/target)*100}%`
+
+                 // Change The difference  value 
+                document.getElementById('difference-field').innerHTML=`$${target-reached}`
+                target='0'
+                targetField=''
+                
+              
+
+            }else alert('Target should be  >= reached')
+            target=''
+            reached=''
+        });
+    </script>
+</body>
+</html>
