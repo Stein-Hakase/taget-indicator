@@ -25,9 +25,7 @@
 
                  // Change The difference  value 
                 document.getElementById('difference-field').innerHTML=`$${target-reached}`
-                target='0'
-                targetField=''
-                
+                             
               
 
             }else alert('Target should be  >= reached')
